@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>高知よさこい演舞スポットマップ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+header {
+  background: #e60033;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+#map {
+  height: calc(100vh - 70px);
+}
+.popup-title {
+  font-weight: bold;
+  font-size: 16px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  🎉 高知よさこい演舞スポットマップ
+</header>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+const map = L.map('map').setView([33.5598, 133.5311], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+const spots = [
+  {
+    name: "追手筋（本部競演場）",
+    lat: 33.5602,
+    lng: 133.5316,
+    description: "よさこい祭り最大のメイン競演場。"
+  },
+   {
+    name: "中央公園競演場",
+    lat: 33.5594,
+    lng: 133.5350,
+    description: "夜の演舞が人気の会場。"
+  },
+  {
+    name: "高知城演舞場",
+    lat: 33.5597,
+     lng: 133.5311,
+    description: "高知城を背景に演舞が披露される。"
+  },
+  {
+    name: "帯屋町商店街演舞場",
+    lat: 33.5608,
+    lng: 133.5377,
+    description: "商店街の中を踊り子が進む人気スポット。"
+  },
+   {
+    name: "はりまや橋演舞場",
+    lat: 33.5587,
+    lng: 133.5434,
+    description: "観光名所での演舞会場。"
+  },
+  {
+    name: "京町・新京橋商店街演舞場",
+    lat: 33.5612,
+    lng: 133.5395,
+    description: "観客との距離が近い演舞場。"
+  }
+];
+
+spots.forEach(spot => {
+  L.marker([spot.lat, spot.lng])
+    .addTo(map)
+    .bindPopup(`
+    <div class="popup-title">${spot.name}</div>
+      <p>${spot.description}</p>
+    `);
+});
+</script>
+
+</body>
+</html>
